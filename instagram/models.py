@@ -1,6 +1,12 @@
 from django.db import models
 
 # Create your models here.
+
+
+class Profile(models.Model):
+    profile_photo = models.ImageField(upload_to = 'media')
+    bio = models.TextField()
+
 class Image(models.Model):
     image = models.ImageField(upload_to = 'media/')
     image_name = models.CharField(max_length=50)
@@ -10,7 +16,3 @@ class Image(models.Model):
     comments = models.TextField()
 
     # implement methods
-
-class Profile(models.Model):
-    profile_photo = models.ImageField(upload_to = 'media')
-    bio = models.TextField()
