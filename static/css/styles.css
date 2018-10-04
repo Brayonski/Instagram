@@ -23,7 +23,7 @@
   /*** Navigation Styles ***/
   nav {
     width: 100vw;
-    height: 160px;
+    height: 100px;
     /* background: #46b2f0; */
     display: grid;
     grid-template-columns: 1fr 1fr;
