@@ -5,8 +5,12 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .email import send_welcome_email
 # Create your views here.
 
+@login_required(login_url='/accounts/login/')
 def welcome(request):
     return render(request,'welcome.html')
+
+def profile(request):
+    return render(request, 'all-insta/profile.html', {"profile":profile}) 
 
 def instagram(request):
     if request.method == 'POST':
