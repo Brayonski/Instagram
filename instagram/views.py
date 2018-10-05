@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .forms import NewsLetterForm
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-
+from .email import send_welcome_email
 # Create your views here.
+
 def welcome(request):
     return render(request,'welcome.html')
 
@@ -15,6 +16,7 @@ def instagram(request):
             email = form.cleaned_data['kiprotichbrian8@gmail.com']
             recipient = NewsLetterForm(name = name, email = email)
             recipient.save()
+            send_welcome_email(name,email)
             HttpResponseRedirect('instagram')
     else:
         form = NewsLetterForm()
