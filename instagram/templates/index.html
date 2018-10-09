@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% block content %}
+{{block.super}}
+
+
+
+<button class="btn btn-info"><a href="{%url 'new-post'%}">Upload image</a></button>
+<div id="#section01" class="container" style="margin-top:30px; margin-left: 18%;">
+    <h2>overflow: auto:</h2>
+    <div class="ex3 container-fluid">
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+            ut laoreet dolore magna aliquam erat volutpat.</p>
+
+    </div>
+    <!-- displaying images -->
+    <div class="" style="margin-top:20px;">
+        {% for post in posts %}
+        <div class="row">
+            <div class="col-md-6 card">
+
+                <div class="card-header" style="height: 70px; padding:5px; border:1px solid rgb(243, 241, 241); background-color: rgb(247, 247, 247);">
+                    <div class="col-md-2">
+                        <img class="img-responsive" src="{{ user.profile.prof_pic.url }}" style="width:50px; border-radius:50%">
+                    </div>
+                    <div class="col-md-10">
+                        <strong>
+                            <h4>{{post.user}}</h4>
+                        </strong>
+                    </div>
+                </div>
+                <div class="card-body" style="margin:0em;">
+                    <!-- modal button-->
+                    <img type="button" class="img-responsive" data-toggle="modal" data-target="#myModal{{post.id}}"
+                        class="img-responsive" src="{{post.image.url }}" alt="" width="550px;">
+                    <!-- modal -->
+                </div>
+
+                <div class="card-footer" style="padding-top:15px; height:100px;border:1px solid rgb(243, 241, 241); background-color: rgb(247, 247, 247);">
+                    <div class="col-md-12">
+                        <span class="likes">
+                            <i class="fa fa-heart" aria-hidden="true" style="font-size:20px;"></i><span class="count"><br>0
+                            </span>Likes
+                        </span>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <p><strong>{{ post.user }}</strong> {{ post.caption }} </p>
+                        <h5><strong>Comments</strong></h5>
+                    <a class="view-more"></a>
+                    {% for comment in post.comments.all %}
+                    <li class="comment-list__comment" style="list-style: none;">
+                        <a href="{% url 'profile' }" class="user">
+                            <strong>{{ comment.user.user.username }}</strong>
+                        </a>
+                        <span class="comment">{{ comment.text }}</span>
+                    </li>
+                    {% endfor %}
+
+
+                    {% if request.user.is_authenticated %}
+                    <section class="input-row">
+                        <i class="fa # submit-like" aria-hidden="true"></i>
+                        <div class="comment-input-wrapper">
+                            <form action="{% url 'comment' image_id=post.id %}" method="post">
+                                {% csrf_token %}
+                                <input class="add-comment" name="text" id="comment{{post.id}}" type="text" placeholder="Add a comment...">
+
+                            </form>
+                        </div>
+                        <div class="hidden-data {{ item.pk }}" style="display: none;">
+                            <span class="post-pk">{{ item.pk }}</span>
+                        </div>
+                    </section>
+                    {% endif %}
+                    </div>
+                    
+
+                </div>
+                <br>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% for post in posts %}
+<!-- modal content -->
+<!-- modal content -->
+<div class="modal fade" id="myModal{{post.id}}" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content" style="background-color:rgba(255, 255, 255, 0.781);">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="">
+                        <img src="{{post.image.url }}" alt="" width="110%" class="img-responsive">
+                    </div>
+                    <div class="">
+                        <button type="" class="close" data-dismiss="modal">&times;</button>
+                        <p><strong>Name:</strong> {{post.user}}</p>
+                        <h4 class="modal-title">{{post.image_caption}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endfor %}
+<script>
+    // console.log('hello world');
+
+    ////////////////////////////////
+    // make heart red and         //
+    // increase or decrease likes //
+    ////////////////////////////////
+
+    // initiate a click event
+    $(".fa-heart").click(function () {
+        // create variable to store parent of clicked heart icon
+        var parent = $(this).parent(".likes");
+
+        // create variable to store span that is child of parent element
+        var countText = parent.find("span");
+
+        // create variable to store integer version of text inside span
+        var count = parseInt(countText.text());
+
+        // toggle red class on heart icon
+        $(this).toggleClass("red");
+
+        // if icon has red class, add 1 to count total and display that on page
+        if ($(this).hasClass("red")) {
+            count += 1;
+            countText.text(" " + count);
+            // otherwise remove one from count total and display that info on page
+        } else {
+            count -= 1;
+            countText.text(" " + count);
+        }
+    });
+</script>
+
+<style>
+    div.ex3 {
+        background-color: lightblue;
+        width: 110px;
+        height: 110px;
+        overflow: auto;
+        float: right;
+    }
+</style>
+
+
+{% endblock %}
