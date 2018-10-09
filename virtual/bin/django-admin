@@ -1,4 +1,4 @@
-#!/media/root/Alpha/projects/core/django/instagram/virtual/bin/python3.6
+#!/media/root/Alpha/projects/core/django/Instagram/virtual/bin/python
 
 # -*- coding: utf-8 -*-
 import re
