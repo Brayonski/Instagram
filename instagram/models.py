@@ -32,6 +32,7 @@ class Post(models.Model):
     post_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, related_name="posted_by", on_delete=models.CASCADE)
     liker = models.ForeignKey(User, related_name='liked_by', on_delete=models.CASCADE,null=True)
+    posted_time = models.DateTimeField(auto_now_add=True)
 
     @property
     def get_comments(self):
