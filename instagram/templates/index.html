@@ -21,7 +21,9 @@
                         </div>
                         <div class="col-md-10">
                             <strong>
-                                <a href="{% url 'profile' %}"><h4>{{post.user}}</h4></a>
+                                <a href="{% url 'profile' %}">
+                                    <h4>{{post.user}}</h4>
+                                </a>
                             </strong>
                         </div>
                     </div>
@@ -111,62 +113,69 @@
     </div>
 
 </div>
-<div class="col-md-4">
-    <div class="ex3">
-        {% for post in posts %}
-        <strong>
-            <h4>{{post.user}}</h4>
-        </strong>
+<div id="halsey">
+    {% for profiles_item in profiles %}
+    <div class="row">
+        <div class="col-md-6">
+            {% if profiles_item.user.profile.profile_image %}
+            <section> <img style="border-radius: 50% ; padding: 0.15rem; background: linear-gradient(to right bottom, #d82c66, #c92e3b, #9c341f, #90236c, #9b5b13);"
+                    class=" img-circle" src="{{profiles_item.user.profile.profile_image.url}}" alt="" width="50px"
+                    height="50px">
+                {{ profiles_item.user.username }}
+            </section>
+            <br>
+            {% else %}
+            <img style="border-radius: 50% ; padding: 0.15rem; background: linear-gradient(to right bottom, #d82c66,
+                        #c92e3b, #e15e43, #f3813f, #6c5486);"
+                class=" img-circle" src="https://www.bristolbrewing.com/wp-content/uploads/2017/08/default-avatar.png
+     https://www.bristolbrewing.com/wp-content/uploads/2017/08/default-avatar.png"alt="" width="50px" height="50px"> 
+     {{ profiles_item.user.username}}<br>
+            {% endif %}
+        </div>
         {% endfor %}
-    </div>
-</div>
+        <script>
+            // console.log('hello world');
+
+            ////////////////////////////////
+            // make heart red and         //
+            // increase or decrease likes //
+            ////////////////////////////////
+
+            // initiate a click event
+            $(".fa-heart").click(function () {
+                // create variable to store parent of clicked heart icon
+                var parent = $(this).parent(".likes");
+
+                // create variable to store span that is child of parent element
+                var countText = parent.find("span");
+
+                // create variable to store integer version of text inside span
+                var count = parseInt(countText.text());
+
+                // toggle red class on heart icon
+                $(this).toggleClass("red");
+
+                // if icon has red class, add 1 to count total and display that on page
+                if ($(this).hasClass("red")) {
+                    count += 1;
+                    countText.text(" " + count);
+                    // otherwise remove one from count total and display that info on page
+                } else {
+                    count -= 1;
+                    countText.text(" " + count);
+                }
+            });
+        </script>
+
+        <style>
+            div.ex3 {
+                background-color: lightblue;
+                /* width: 110px; */
+                /* height: 110px; */
+                /* overflow: auto; */
+                float: left;
+            }
+        </style>
 
 
-
-{% endfor %}
-<script>
-    // console.log('hello world');
-
-    ////////////////////////////////
-    // make heart red and         //
-    // increase or decrease likes //
-    ////////////////////////////////
-
-    // initiate a click event
-    $(".fa-heart").click(function () {
-        // create variable to store parent of clicked heart icon
-        var parent = $(this).parent(".likes");
-
-        // create variable to store span that is child of parent element
-        var countText = parent.find("span");
-
-        // create variable to store integer version of text inside span
-        var count = parseInt(countText.text());
-
-        // toggle red class on heart icon
-        $(this).toggleClass("red");
-
-        // if icon has red class, add 1 to count total and display that on page
-        if ($(this).hasClass("red")) {
-            count += 1;
-            countText.text(" " + count);
-            // otherwise remove one from count total and display that info on page
-        } else {
-            count -= 1;
-            countText.text(" " + count);
-        }
-    });
-</script>
-
-<style>
-    div.ex3 {
-        background-color: lightblue;
-        /* width: 110px; */
-        /* height: 110px; */
-        /* overflow: auto; */
-        float: left;
-    }
-</style>
-
-
-{% endblock %}
+        {% endblock %}
