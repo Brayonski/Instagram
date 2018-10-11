@@ -50,7 +50,7 @@
                                 <a href="{% url 'profile' }" class="user">
                                     <strong>{{ comment.user.user.username }}</strong>
                                 </a>
-                                <span class="comment">{{ comment.text }}</span>
+                                <a href="{% url 'profile' %}"><span class="comment">{{ comment.text }}</span></a>
                             </li>
                             {% endfor %}
 
