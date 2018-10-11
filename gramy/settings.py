@@ -45,7 +45,7 @@ STATICFILES_DIRS = (
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'instagram.apps.InstagramConfig',
+    # 'instagram.apps.InstagramConfig',
     'bootstrap3',
     'django.contrib.auth',
     'django.contrib.contenttypes',
