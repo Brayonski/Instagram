@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load staticfiles %}
 {{block.super}}
 
 
@@ -111,6 +112,7 @@
 
         </div>
     </div>
+    {% endfor %}
 
 </div>
 <div id="halsey">
@@ -128,54 +130,58 @@
             <img style="border-radius: 50% ; padding: 0.15rem; background: linear-gradient(to right bottom, #d82c66,
                         #c92e3b, #e15e43, #f3813f, #6c5486);"
                 class=" img-circle" src="https://www.bristolbrewing.com/wp-content/uploads/2017/08/default-avatar.png
-     https://www.bristolbrewing.com/wp-content/uploads/2017/08/default-avatar.png"alt="" width="50px" height="50px"> 
-     {{ profiles_item.user.username}}<br>
+     https://www.bristolbrewing.com/wp-content/uploads/2017/08/default-avatar.png"
+                alt="" width="50px" height="50px">
+            {{ profiles_item.user.username}}<br>
             {% endif %}
         </div>
-        {% endfor %}
-        <script>
-            // console.log('hello world');
+    </div>
+    {% endfor %}
+</div>
 
-            ////////////////////////////////
-            // make heart red and         //
-            // increase or decrease likes //
-            ////////////////////////////////
+<script>
+    // console.log('hello world');
 
-            // initiate a click event
-            $(".fa-heart").click(function () {
-                // create variable to store parent of clicked heart icon
-                var parent = $(this).parent(".likes");
+    ////////////////////////////////
+    // make heart red and         //
+    // increase or decrease likes //
+    ////////////////////////////////
 
-                // create variable to store span that is child of parent element
-                var countText = parent.find("span");
+    // initiate a click event
+    $(".fa-heart").click(function () {
+        // create variable to store parent of clicked heart icon
+        var parent = $(this).parent(".likes");
 
-                // create variable to store integer version of text inside span
-                var count = parseInt(countText.text());
+        // create variable to store span that is child of parent element
+        var countText = parent.find("span");
 
-                // toggle red class on heart icon
-                $(this).toggleClass("red");
+        // create variable to store integer version of text inside span
+        var count = parseInt(countText.text());
 
-                // if icon has red class, add 1 to count total and display that on page
-                if ($(this).hasClass("red")) {
-                    count += 1;
-                    countText.text(" " + count);
-                    // otherwise remove one from count total and display that info on page
-                } else {
-                    count -= 1;
-                    countText.text(" " + count);
-                }
-            });
-        </script>
+        // toggle red class on heart icon
+        $(this).toggleClass("red");
 
-        <style>
-            div.ex3 {
-                background-color: lightblue;
-                /* width: 110px; */
-                /* height: 110px; */
-                /* overflow: auto; */
-                float: left;
-            }
-        </style>
+        // if icon has red class, add 1 to count total and display that on page
+        if ($(this).hasClass("red")) {
+            count += 1;
+            countText.text(" " + count);
+            // otherwise remove one from count total and display that info on page
+        } else {
+            count -= 1;
+            countText.text(" " + count);
+        }
+    });
+</script>
+
+<style>
+    div.ex3 {
+        background-color: lightblue;
+        /* width: 110px; */
+        /* height: 110px; */
+        /* overflow: auto; */
+        float: left;
+    }
+</style>
 
 
-        {% endblock %}
+{% endblock %}
