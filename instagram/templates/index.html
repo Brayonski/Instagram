@@ -16,11 +16,12 @@
 
                     <div class="card-header" style="height: 70px; padding:5px; border:1px solid rgb(243, 241, 241); background-color: rgb(247, 247, 247);">
                         <div class="col-md-2">
-                            <img class="img-responsive" src="{{ user.profile.prof_pic.url }}" style="width:50px; border-radius:50%">
+                            <img class="img-responsive" src="{{ post.user.profile.prof_pic.url }}" style="width:50px; border-radius:50%">
+                            {{ post.profile.prof_pic.url }}
                         </div>
                         <div class="col-md-10">
                             <strong>
-                                <h4>{{post.user}}</h4>
+                                <a href="{% url 'profile' %}"><h4>{{post.user}}</h4></a>
                             </strong>
                         </div>
                     </div>
